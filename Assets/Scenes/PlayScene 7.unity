@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: -9023268110607155727, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
       propertyPath: gameOver
       value: 
-      objectReference: {fileID: 556179035}
+      objectReference: {fileID: 556179037}
     - target: {fileID: -9023268110607155727, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
       propertyPath: ExplosionGO
       value: 
@@ -817,7 +817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3675, y: 0.231}
   m_AnchorMax: {x: 0.665, y: 0.783167}
-  m_AnchoredPosition: {x: -7.999893, y: -162}
+  m_AnchoredPosition: {x: -7.999878, y: -162}
   m_SizeDelta: {x: 178.55, y: 1.3410034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &443817980
@@ -1247,7 +1247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556179036}
-  - component: {fileID: 556179035}
+  - component: {fileID: 556179037}
   m_Layer: 0
   m_Name: GameManagerGO
   m_TagString: Untagged
@@ -1255,28 +1255,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &556179035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556179034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574831048ffa6864b86fc55d2c0dd496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOver: {fileID: 358846522}
-  winnerTextGO: {fileID: 1362004464}
-  ImageHP: {fileID: 1401590945}
-  scoreUITextGO: {fileID: 121830755}
-  countdownPanel: {fileID: 1199473176}
-  countdownImage: {fileID: 1266242390}
-  countdownSprites:
-  - {fileID: 21300000, guid: 1baaa35bcc1a40b45a73a4b22d52855e, type: 3}
-  - {fileID: 21300000, guid: 88d179e177122d949a419c1e3a89c593, type: 3}
-  - {fileID: 21300000, guid: a83f4aeb628167b4a960a9cc00dc9e9e, type: 3}
 --- !u!4 &556179036
 Transform:
   m_ObjectHideFlags: 0
@@ -1292,6 +1270,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556179037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556179034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574831048ffa6864b86fc55d2c0dd496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOver: {fileID: 358846522}
+  winnerTextGO: {fileID: 1362004464}
+  ImageHP: {fileID: 0}
+  scoreUITextGO: {fileID: 0}
+  countdownPanel: {fileID: 1199473176}
+  countdownImage: {fileID: 0}
+  countdownSprites:
+  - {fileID: 21300000, guid: 1baaa35bcc1a40b45a73a4b22d52855e, type: 3}
+  - {fileID: 21300000, guid: 88d179e177122d949a419c1e3a89c593, type: 3}
+  - {fileID: 21300000, guid: a83f4aeb628167b4a960a9cc00dc9e9e, type: 3}
+  fireworksPrefab: {fileID: 5932903170215418476, guid: d45a2614dfa84194aaf8a9a64fee4a74, type: 3}
 --- !u!1 &580599336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,11 +2315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 0}
   winnerTextGO: {fileID: 0}
-  ImageHP: {fileID: 0}
+  ImageHP: {fileID: 1401590945}
   scoreUITextGO: {fileID: 0}
   countdownPanel: {fileID: 0}
   countdownImage: {fileID: 0}
   countdownSprites: []
+  fireworksPrefab: {fileID: 0}
 --- !u!1 &1360060780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1587078856420153946, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
@@ -2464,10 +2466,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 358312023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: 104}
-  m_SizeDelta: {x: 281.07, y: 55.21}
+  m_AnchorMin: {x: 0.41437504, y: 0.52177995}
+  m_AnchorMax: {x: 0.7018749, y: 0.596822}
+  m_AnchoredPosition: {x: 0.5, y: -21.5}
+  m_SizeDelta: {x: 43.549988, y: 92.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362004466
 MonoBehaviour:
@@ -2489,7 +2491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WINNER
+  m_text: YOU WIN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2516,13 +2518,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2600,7 +2602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.22529618}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.065002, y: 11.130001}
+  m_AnchoredPosition: {x: 10.065002, y: 11.130003}
   m_SizeDelta: {x: 20.130005, y: 25.330002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1401590945
@@ -3502,7 +3504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32335743, y: 0.19972335}
   m_AnchorMax: {x: 0.6922715, y: 0.4033372}
-  m_AnchoredPosition: {x: 4.982498, y: -50.00002}
+  m_AnchoredPosition: {x: 4.982498, y: -50.00003}
   m_SizeDelta: {x: 7.785, y: -19.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575580504
@@ -3728,7 +3730,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 556179035}
+      - m_Target: {fileID: 556179037}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -3861,7 +3863,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 556179035}
+      - m_Target: {fileID: 556179037}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1

@@ -284,11 +284,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 0}
+  winnerTextGO: {fileID: 0}
   ImageHP: {fileID: 1917108030}
   scoreUITextGO: {fileID: 0}
   countdownPanel: {fileID: 0}
   countdownImage: {fileID: 0}
   countdownSprites: []
+  fireworksPrefab: {fileID: 0}
 --- !u!223 &228241441
 Canvas:
   m_ObjectHideFlags: 0
@@ -748,9 +750,10 @@ MonoBehaviour:
   targetScore2: 2000
   targetScore3: 3000
   targetScore4: 4000
-  targetScore5: 10000
+  targetScore5: 4000
   targetScore6: 6000
   targetScore7: 7000
+  targetScore8: 7000
   scene1: PlayScene
   scene2: PlayScene 1
   scene3: PlayScene 2
@@ -758,6 +761,7 @@ MonoBehaviour:
   scene5: PlayScene 4
   scene6: PlayScene 5
   scene7: PlayScene 6
+  scene8: PlayScene 7
 --- !u!1 &447500066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,6 +3425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 36000195}
+  winnerTextGO: {fileID: 0}
   ImageHP: {fileID: 0}
   scoreUITextGO: {fileID: 0}
   countdownPanel: {fileID: 1959663841}
@@ -3429,6 +3434,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1baaa35bcc1a40b45a73a4b22d52855e, type: 3}
   - {fileID: 21300000, guid: 88d179e177122d949a419c1e3a89c593, type: 3}
   - {fileID: 21300000, guid: a83f4aeb628167b4a960a9cc00dc9e9e, type: 3}
+  fireworksPrefab: {fileID: 0}
 --- !u!4 &2005214004
 Transform:
   m_ObjectHideFlags: 0

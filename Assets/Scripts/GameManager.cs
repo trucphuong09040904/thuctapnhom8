@@ -9,7 +9,7 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOver;  // UI Game Over
-    public GameObject winnerTextGO; // UI Winner
+    public GameObject winnerTextGO; // UI Winner Text
     public Image ImageHP;  // Thanh máu
     public GameObject scoreUITextGO; // UI điểm số
 
@@ -17,14 +17,33 @@ public class GameManager : MonoBehaviour
     public Image countdownImage;
     public Sprite[] countdownSprites; // 3 ảnh đếm ngược
 
+    public GameObject fireworksPrefab; // Thêm biến prefab pháo bông
+
     private bool isGameOver = false;
+    private const int WINNING_SCORE = 10000; // Điểm thắng
+    private const string WINNING_SCENE = "PlayScene 7"; // Tên của màn 7
 
     void Start()
     {
+        // Ẩn Winner Text và Game Over lúc đầu
         if (winnerTextGO != null)
         {
-            winnerTextGO.SetActive(false); // Ẩn Winner lúc đầu
+            winnerTextGO.SetActive(false);
         }
+        else
+        {
+            Debug.LogError("⚠ Lỗi: winnerTextGO chưa được gán trong GameManager!");
+        }
+
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("⚠ Lỗi: gameOver chưa được gán trong GameManager!");
+        }
+
         StartCoroutine(ExpandPanelAndCountdown());
     }
 
@@ -44,6 +63,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        // Đếm ngược 3, 2, 1
         if (countdownImage != null && countdownSprites.Length > 0)
         {
             for (int i = 0; i < countdownSprites.Length; i++)
@@ -69,40 +89,83 @@ public class GameManager : MonoBehaviour
             Debug.LogError("⚠ Lỗi: ImageHP chưa được gán trong GameManager!");
         }
 
+        // Kiểm tra nếu máu hết thì dừng game
         if (currentHP <= 0)
         {
             Over();
         }
     }
 
+    // Hàm kiểm tra điểm số và hiển thị Winner nếu đạt 500 điểm ở màn 7
+    public void CheckScoreForWin()
+    {
+        if (isGameOver) return; // Tránh gọi nhiều lần
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        int playerScore = GameScore.instance != null ? GameScore.instance.Score : 0;
+
+        if (currentScene == WINNING_SCENE && playerScore >= WINNING_SCORE)
+        {
+            isGameOver = true;
+            Time.timeScale = 0f; // Dừng game
+            if (winnerTextGO != null)
+            {
+                winnerTextGO.SetActive(true); // Hiện "Winner"
+            }
+
+            // Hiển thị pháo bông ngay khi "Winner" được hiển thị
+            if (fireworksPrefab != null)
+            {
+                Instantiate(fireworksPrefab, Vector3.zero, Quaternion.identity); // Hiện pháo bông tại vị trí (0, 0, 0)
+            }
+
+            StartCoroutine(ShowGameOverAfterDelay(2f)); // Sau 2 giây hiện "Game Over"
+        }
+    }
+
     public void Over()
     {
-        if (isGameOver) return;
+        if (isGameOver) return; // Tránh gọi nhiều lần
         isGameOver = true;
 
         Time.timeScale = 0f; // Dừng toàn bộ game
-        int playerScore = PlayerPrefs.GetInt("currentScore", 0);
+        int playerScore = GameScore.instance != null ? GameScore.instance.Score : 0;
+        string currentScene = SceneManager.GetActiveScene().name;
 
-        if (playerScore >= 500) // Nếu đạt >= 500 điểm
+        // Nếu ở màn 7 và đạt 500 điểm, hiển thị Winner trước
+        if (currentScene == WINNING_SCENE && playerScore >= WINNING_SCORE)
         {
             if (winnerTextGO != null)
             {
                 winnerTextGO.SetActive(true); // Hiện "Winner"
             }
-            Invoke("ShowGameOver", 2f); // Sau 2 giây mới hiện "Game Over"
+
+            // Hiển thị pháo bông
+            if (fireworksPrefab != null)
+            {
+                Instantiate(fireworksPrefab, Vector3.zero, Quaternion.identity); // Hiện pháo bông tại vị trí (0, 0, 0)
+            }
+
+            StartCoroutine(ShowGameOverAfterDelay(2f)); // Sau 2 giây hiện "Game Over"
         }
         else
         {
-            ShowGameOver(); // Nếu chưa đạt 500 điểm, hiện "Game Over" ngay lập tức
+            ShowGameOver(); // Nếu không đạt 500 điểm hoặc không ở màn 7, hiện "Game Over" ngay
         }
     }
 
+    private IEnumerator ShowGameOverAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay); // Sử dụng thời gian thực
+        ShowGameOver();
+    }
 
     void ShowGameOver()
     {
         if (gameOver != null)
         {
             gameOver.SetActive(true);
+            Debug.Log("Hiển thị Game Over UI");
         }
         else
         {
@@ -115,6 +178,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f; // Reset thời gian trước khi restart
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+        // Kiểm tra nếu scoreUITextGO tồn tại
         if (scoreUITextGO != null)
         {
             scoreUITextGO.GetComponent<GameScore>().Score = 0;

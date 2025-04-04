@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
         if (currentHP <= 0 && !isDead)
         {
             isDead = true;
-            gameOver.Over(); // Gọi GameManager.Over()
+            gameOver.Over();
             Destroy(gameObject);
         }
     }

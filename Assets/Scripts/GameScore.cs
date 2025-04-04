@@ -6,11 +6,7 @@ using TMPro; // Thêm thư viện TMP
 
 public class GameScore : MonoBehaviour
 {
-
-    public static GameScore instance; // 🔹 Biến instance để gọi từ bất kỳ đâu
-
-
-
+    public static GameScore instance; // Biến instance để gọi từ bất kỳ đâu
 
     TMP_Text scoreTextUI; // Sử dụng TMP_Text thay vì Text
     int score;
@@ -33,6 +29,7 @@ public class GameScore : MonoBehaviour
     public string scene7 = "PlayScene 6";
     public string scene8 = "PlayScene 7";
 
+    private GameManager gameManager; // Tham chiếu đến GameManager
 
     public int Score
     {
@@ -42,12 +39,17 @@ public class GameScore : MonoBehaviour
             this.score = value;
             UpdateScoreTextUI();
             CheckAndLoadNextScene();
+            // Gọi CheckScoreForWin để kiểm tra điểm số
+            if (gameManager != null)
+            {
+                gameManager.CheckScoreForWin();
+            }
         }
     }
 
     void Awake()
     {
-        // 🔹 Đảm bảo chỉ có 1 instance của GameScore
+        // Đảm bảo chỉ có 1 instance của GameScore
         if (instance == null)
         {
             instance = this;
@@ -58,10 +60,10 @@ public class GameScore : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         scoreTextUI = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+        gameManager = FindObjectOfType<GameManager>(); // Tìm GameManager
 
         if (scoreTextUI == null)
         {
@@ -70,6 +72,11 @@ public class GameScore : MonoBehaviour
         else
         {
             UpdateScoreTextUI();
+        }
+
+        if (gameManager == null)
+        {
+            Debug.LogError("GameScore: Không tìm thấy GameManager trong scene!");
         }
     }
 
@@ -120,8 +127,7 @@ public class GameScore : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-
-    // 🔹 Thêm hàm này để cập nhật điểm số khi Boss bị bắn
+    // Thêm hàm này để cập nhật điểm số khi Boss bị bắn
     public void AddScore(int amount)
     {
         Score += amount;
