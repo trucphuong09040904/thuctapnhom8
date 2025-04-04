@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 590955650}
   - component: {fileID: 590955649}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: CHART
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,8 +382,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.38749522, y: 0.36800003}
   m_AnchorMax: {x: 0.5852038, y: 0.5}
-  m_AnchoredPosition: {x: 11.423996, y: 17}
-  m_SizeDelta: {x: 61.98, y: 80.9}
+  m_AnchoredPosition: {x: 15.310001, y: 16.7}
+  m_SizeDelta: {x: 54.21, y: 80.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &590955649
 MonoBehaviour:
@@ -1036,8 +1036,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.38749522, y: 0.63000005}
   m_AnchorMax: {x: 0.64275, y: 0.7861381}
-  m_AnchoredPosition: {x: -4.2585, y: 13}
-  m_SizeDelta: {x: 1.271, y: 57.25}
+  m_AnchoredPosition: {x: -4.258, y: 17.46}
+  m_SizeDelta: {x: 1.272, y: 66.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987577035
 MonoBehaviour:

@@ -141,9 +141,13 @@ public class BossAI : MonoBehaviour
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject); // Xóa Boss khi chết
+
+      
+
         Destroy(healthBarUI.gameObject);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

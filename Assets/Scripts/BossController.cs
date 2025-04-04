@@ -111,20 +111,21 @@ public class BossController : MonoBehaviour
         Destroy(bossMain.gameObject);
         Destroy(bossLeft.gameObject);
         Destroy(bossRight.gameObject);
-    }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("PlayerShipTag"))
+        // Gọi Boss màn 7
+    }
+        void OnTriggerEnter2D(Collider2D other)
         {
-            other.GetComponent<PlayerController>().TakeDamage(2);
-        }
+            if (other.CompareTag("PlayerShipTag"))
+            {
+                other.GetComponent<PlayerController>().TakeDamage(2);
+            }
 
-        if (other.CompareTag("PlayerBulletTag"))
-        {
-            TakeDamage(100);
-            FindObjectOfType<GameScore>().AddScore(100);
-            Destroy(other.gameObject);
+            if (other.CompareTag("PlayerBulletTag"))
+            {
+                TakeDamage(100);
+                FindObjectOfType<GameScore>().AddScore(100);
+                Destroy(other.gameObject);
+            }
         }
     }
-}

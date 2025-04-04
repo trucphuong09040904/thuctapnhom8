@@ -5,6 +5,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject EnemyGO; //this is our enemy prefab
+    public float baseSpeed = 2f; // Tốc độ cơ bản
+    public float speedMultiplier = 1f; // Hệ số nhân tốc độ
+    private float speed; // Tốc độ thực tế của enemy
+
 
     float maxSpawnRateInSeconds = 5f;
 
@@ -15,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
         //increase spawn rate every 30 seconds
         InvokeRepeating("IncreaseSpawnRate", 0f, 30f);
+        speed = baseSpeed * speedMultiplier;
     }
 
     // Update is called once per frame
@@ -61,5 +66,10 @@ public class EnemySpawner : MonoBehaviour
             maxSpawnRateInSeconds--;
         if (maxSpawnRateInSeconds == 1f)
             CancelInvoke("IncreaseSpawnRate");
+    }
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+        speed = baseSpeed * speedMultiplier; // Cập nhật tốc độ mới
     }
 }

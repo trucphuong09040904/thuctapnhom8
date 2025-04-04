@@ -9,6 +9,7 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOver;  // UI Game Over
+    public GameObject winnerTextGO; // UI Winner
     public Image ImageHP;  // Thanh máu
     public GameObject scoreUITextGO; // UI điểm số
 
@@ -16,8 +17,14 @@ public class GameManager : MonoBehaviour
     public Image countdownImage;
     public Sprite[] countdownSprites; // 3 ảnh đếm ngược
 
+    private bool isGameOver = false;
+
     void Start()
     {
+        if (winnerTextGO != null)
+        {
+            winnerTextGO.SetActive(false); // Ẩn Winner lúc đầu
+        }
         StartCoroutine(ExpandPanelAndCountdown());
     }
 
@@ -37,7 +44,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // Đếm ngược 3, 2, 1
         if (countdownImage != null && countdownSprites.Length > 0)
         {
             for (int i = 0; i < countdownSprites.Length; i++)
@@ -63,7 +69,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("⚠ Lỗi: ImageHP chưa được gán trong GameManager!");
         }
 
-        // Kiểm tra nếu máu hết thì dừng game
         if (currentHP <= 0)
         {
             Over();
@@ -72,23 +77,44 @@ public class GameManager : MonoBehaviour
 
     public void Over()
     {
+        if (isGameOver) return;
+        isGameOver = true;
+
         Time.timeScale = 0f; // Dừng toàn bộ game
+        int playerScore = PlayerPrefs.GetInt("currentScore", 0);
+
+        if (playerScore >= 500) // Nếu đạt >= 500 điểm
+        {
+            if (winnerTextGO != null)
+            {
+                winnerTextGO.SetActive(true); // Hiện "Winner"
+            }
+            Invoke("ShowGameOver", 2f); // Sau 2 giây mới hiện "Game Over"
+        }
+        else
+        {
+            ShowGameOver(); // Nếu chưa đạt 500 điểm, hiện "Game Over" ngay lập tức
+        }
+    }
+
+
+    void ShowGameOver()
+    {
         if (gameOver != null)
         {
             gameOver.SetActive(true);
         }
         else
         {
-            
+            Debug.LogError("⚠ Lỗi: gameOver UI chưa được gán trong GameManager!");
         }
-    } // 🔴 Đóng ngoặc đúng vị trí của Over()
+    }
 
     public void restart()
     {
         Time.timeScale = 1f; // Reset thời gian trước khi restart
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        // Kiểm tra nếu scoreUITextGO tồn tại
         if (scoreUITextGO != null)
         {
             scoreUITextGO.GetComponent<GameScore>().Score = 0;
@@ -98,6 +124,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("⚠ Lỗi: scoreUITextGO chưa được gán trong GameManager!");
         }
     }
+
     public void quit()
     {
 #if UNITY_EDITOR

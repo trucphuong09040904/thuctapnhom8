@@ -9,7 +9,7 @@ public class Demgio : MonoBehaviour
     public GameObject countdownPanel;
     public TextMeshProUGUI countdownText;
 
-    private float timeRemaining = 91f;
+    private float timeRemaining = 160f;
     private bool isGameOver = false;
 
     void Start()

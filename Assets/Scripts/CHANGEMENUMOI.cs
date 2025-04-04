@@ -60,4 +60,8 @@ public class CHANGEMENUMOI : MonoBehaviour
         PlayerPrefs.SetInt("Difficulty", 2); // L?u ch? ?? Hard
         PlayerPrefs.Save(); // L?u l?i d? li?u
     }
+    public void LoadLeaderboard()
+    {
+        SceneManager.LoadScene("LeaderboardScene");
+    }
 }

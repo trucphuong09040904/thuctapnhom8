@@ -21,6 +21,8 @@ TagManager:
   - BossM6
   - Minion
   - BossBulletM6
+  - BossBulletM8
+  - BossM8
   layers:
   - Default
   - TransparentFX

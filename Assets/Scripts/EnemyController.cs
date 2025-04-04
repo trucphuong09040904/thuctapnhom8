@@ -5,28 +5,29 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public GameObject ExplosionGO; // Prefab vụ nổ
-    public float speed;
+    public float baseSpeed = 2f; // Tốc độ cơ bản
+    public float speedMultiplier = 1f; // Hệ số nhân tốc độ
+    private float speed; // Tốc độ thực tế của enemy
 
-    private GameScore gameScore; // Tham chiếu đến GameScore
-    private bool isDestroyed = false; // Biến ngăn chặn cộng điểm hai lần
+    private GameScore gameScore;
+    private bool isDestroyed = false;
 
     void Start()
     {
-        // Tìm đối tượng chứa GameScore
         gameScore = FindObjectOfType<GameScore>();
-
         if (gameScore == null)
         {
-            Debug.LogError("EnemyController: Không tìm thấy GameScore! Hãy đảm bảo có GameScore trong scene.");
+            Debug.LogError("EnemyController: Không tìm thấy GameScore!");
         }
+
+        // Tính toán tốc độ thực tế
+        speed = baseSpeed * speedMultiplier;
     }
 
     void Update()
     {
-        // Di chuyển enemy xuống dưới
         transform.position += Vector3.down * speed * Time.deltaTime;
 
-        // Xóa enemy nếu đi quá màn hình
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         if (transform.position.y < min.y)
         {
@@ -36,14 +37,11 @@ public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // Ngăn chặn cộng điểm nhiều lần
         if (isDestroyed) return;
 
-        // Kiểm tra va chạm với đạn hoặc tàu người chơi
         if (col.CompareTag("PlayerShipTag") || col.CompareTag("PlayerBulletTag"))
         {
-            isDestroyed = true; // Đánh dấu enemy đã bị phá hủy
-
+            isDestroyed = true;
             PlayExplosion();
 
             if (gameScore != null)
@@ -52,7 +50,6 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("Enemy bị bắn! Điểm hiện tại: " + gameScore.Score);
             }
 
-            // Xóa đạn ngay sau khi va chạm để tránh cộng điểm nhiều lần
             if (col.CompareTag("PlayerBulletTag"))
             {
                 Destroy(col.gameObject);
@@ -65,5 +62,12 @@ public class EnemyController : MonoBehaviour
     void PlayExplosion()
     {
         Instantiate(ExplosionGO, transform.position, Quaternion.identity);
+    }
+
+    // Hàm này cho phép thay đổi tốc độ enemy từ bên ngoài
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+        speed = baseSpeed * speedMultiplier; // Cập nhật tốc độ mới
     }
 }

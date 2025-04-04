@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isDead;
     private bool canMove = true; // Biến kiểm tra Player có thể di chuyển
+    public bool isControlInverted = false; // Biến kiểm tra đảo ngược điều khiển
 
     void Start()
     {
@@ -48,8 +49,8 @@ public class PlayerController : MonoBehaviour
                 bullet02.transform.position = bulletPosition02.transform.position;
             }
 
-            float x = Input.GetAxisRaw("Horizontal");
-            float y = Input.GetAxisRaw("Vertical");
+            float x = Input.GetAxisRaw("Horizontal") * (isControlInverted ? -1 : 1);
+            float y = Input.GetAxisRaw("Vertical") * (isControlInverted ? -1 : 1);
             Vector2 direction = new Vector2(x, y).normalized;
             Move(direction);
         }
@@ -84,6 +85,13 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(2f);
             PlayExplosion();
+        }
+
+        if (col.CompareTag("BossBulletM8")) // Đạn Boss màn 8 gây sát thương và đảo ngược điều khiển
+        {
+            TakeDamage(2f);
+            StartCoroutine(InvertControls(2f)); // Đảo ngược điều khiển trong 2 giây
+            Destroy(col.gameObject);
         }
 
         if (col.CompareTag("Boss")) // 🔥 Va chạm Boss màn 5, mất 2 HP
@@ -135,6 +143,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+     public   IEnumerator InvertControls(float duration)
+    {
+        isControlInverted = true;
+        yield return new WaitForSeconds(duration);
+        isControlInverted = false;
+    }
+
     void CreateCollisionEffect(Vector3 position)
     {
         if (collisionEffectPrefab != null)
@@ -159,10 +174,11 @@ public class PlayerController : MonoBehaviour
         if (currentHP <= 0 && !isDead)
         {
             isDead = true;
-            gameOver.Over();
+            gameOver.Over(); // Gọi GameManager.Over()
             Destroy(gameObject);
         }
     }
+
 
     public void Heal(float amount)
     {
