@@ -6,19 +6,20 @@ using TMPro; // Thêm thư viện TMP
 
 public class GameScore : MonoBehaviour
 {
-    public static GameScore instance; // Biến instance để gọi từ bất kỳ đâu
-
-    TMP_Text scoreTextUI; // Sử dụng TMP_Text thay vì Text
+    public static GameScore instance;
+    public GameObject statsPanel;
+    public GameObject VictoryPanel;
+    TMP_Text scoreTextUI; 
     int score;
 
-    public int targetScore1 = 1000;
+    public int targetScore1 = 1500;
     public int targetScore2 = 2000;
     public int targetScore3 = 3000;
     public int targetScore4 = 4000;
     public int targetScore5 = 5000;
     public int targetScore6 = 6000;
     public int targetScore7 = 7000;
-    public int targetScore8 = 7000;
+    public int targetScore8 = 100;
 
     public string scene1 = "PlayScene";
     public string scene2 = "PlayScene 1";
@@ -116,14 +117,43 @@ public class GameScore : MonoBehaviour
         {
             LoadNextScene(scene7);
         }
-        else if (currentScene == scene7 && score >= targetScore8)
+        else if (currentScene == scene7 && score >= targetScore7)
         {
             LoadNextScene(scene8);
+        }
+        else if (currentScene == scene8 && score >= targetScore8)
+        {
+            LevelTimer timer = FindObjectOfType<LevelTimer>();
+            if (timer != null)
+            {
+                timer.SaveTime();
+                float completedTime = Time.time - timer.startTime; // Tính thời gian đã hoàn thành
+                Debug.Log($"✅ Thời gian đã được lưu cho {timer.levelKey}: {completedTime:F2} giây");
+            }
+            else
+            {
+                Debug.LogWarning("⚠️ Không tìm thấy LevelTimer trong scene hiện tại!");
+            }
+
+            ShowStatsPanel();
         }
     }
 
     void LoadNextScene(string sceneName)
     {
+        LevelTimer timer = FindObjectOfType<LevelTimer>();
+        if (timer != null)
+        {
+            timer.SaveTime();
+            float completedTime = Time.time - timer.startTime; // Tính thời gian đã hoàn thành
+            Debug.Log($"✅ Thời gian đã được lưu cho {timer.levelKey}: {completedTime:F2} giây");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Không tìm thấy LevelTimer trong scene hiện tại!");
+        }
+
+        Debug.Log("🔁 Đang chuyển đến scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -132,4 +162,43 @@ public class GameScore : MonoBehaviour
     {
         Score += amount;
     }
+    
+    void ShowStatsPanel()
+    {
+        FindObjectOfType<LevelTimer>()?.SaveTime();
+
+        if (statsPanel != null)
+        {
+            statsPanel.SetActive(true);
+            Animator animator = statsPanel.GetComponent<Animator>();
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("PanelSlideUp"))
+                    {
+                        animator.Play("PanelSlideUp");
+                    }
+            Debug.Log("📊 Hiển thị bảng thống kê thời gian hoàn thành!");
+        }
+        else
+        {
+            Debug.LogWarning("❌ Không gán StatsPanel trong Inspector!");
+        }
+
+        if (VictoryPanel != null)
+        {
+            VictoryPanel.SetActive(true);
+            Animator animator = VictoryPanel.GetComponent<Animator>();
+            if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("PanelSlideInFromLeft"))
+            {
+                animator.Play("PanelSlideInFromLeft");
+            }
+
+            Debug.Log("➡️ Hiển thị sideStatsPanel với animation trượt từ trái sang phải!");
+        }
+        else
+        {
+            Debug.LogWarning("❌ sideStatsPanel chưa được gán trong Inspector!");
+        }
+
+    }
+
+
 }
