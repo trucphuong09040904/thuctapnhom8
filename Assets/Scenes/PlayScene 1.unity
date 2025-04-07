@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 1075156326}
+  winnerTextGO: {fileID: 0}
   ImageHP: {fileID: 0}
   scoreUITextGO: {fileID: 0}
   countdownPanel: {fileID: 355233999}
@@ -487,6 +488,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1baaa35bcc1a40b45a73a4b22d52855e, type: 3}
   - {fileID: 21300000, guid: 88d179e177122d949a419c1e3a89c593, type: 3}
   - {fileID: 21300000, guid: a83f4aeb628167b4a960a9cc00dc9e9e, type: 3}
+  fireworksPrefab: {fileID: 0}
 --- !u!4 &216558108
 Transform:
   m_ObjectHideFlags: 0
@@ -1023,7 +1025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3703605, y: 0.27845106}
   m_AnchorMax: {x: 0.6307209, y: 0.35754895}
-  m_AnchoredPosition: {x: -5.7595997, y: -15.000001}
+  m_AnchoredPosition: {x: -5.7595997, y: -15.000002}
   m_SizeDelta: {x: 33.706, y: 66.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607888034
@@ -2079,6 +2081,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1213479092
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25073236
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.10702548
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.051931795
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610168777470999145, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4916718432707602820, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: levelKey
+      value: "M\xE0n 2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167362991936449437, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
+      propertyPath: m_Name
+      value: LevelManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c2a40838da0f384dad223decd00a895, type: 3}
 --- !u!1 &1240255855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,6 +2380,7 @@ MonoBehaviour:
   targetScore5: 5000
   targetScore6: 6000
   targetScore7: 7000
+  targetScore8: 7000
   scene1: PlayScene
   scene2: PlayScene 1
   scene3: PlayScene 2
@@ -2324,6 +2388,7 @@ MonoBehaviour:
   scene5: PlayScene 4
   scene6: PlayScene 5
   scene7: PlayScene 6
+  scene8: PlayScene 7
 --- !u!1 &1272721940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,11 +2892,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 0}
+  winnerTextGO: {fileID: 0}
   ImageHP: {fileID: 205065591}
   scoreUITextGO: {fileID: 0}
   countdownPanel: {fileID: 0}
   countdownImage: {fileID: 0}
   countdownSprites: []
+  fireworksPrefab: {fileID: 0}
 --- !u!212 &2079909767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2899,3 +2966,4 @@ SceneRoots:
   - {fileID: 1240255857}
   - {fileID: 1942235155}
   - {fileID: 62942376}
+  - {fileID: 1213479092}
